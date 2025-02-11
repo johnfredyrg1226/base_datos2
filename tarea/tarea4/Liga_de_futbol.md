@@ -16,25 +16,7 @@ Diseña el modelo entidad-relación resultante a través de diagrams.io.
 
 ## Diagrama Entidad-Relación
 
-![Diagrama ER]()
-🔹 Entidades y Relaciones
-Jugador (CódigoJugador, Nombre, FechaNacimiento, Posición, CódigoEquipo)
-
-Relación: Pertenece a (1,1) → (0,N) Equipo
-Equipo (CódigoEquipo, Nombre, Estadio, Aforo, AñoFundación, Ciudad)
-
-Relación: Tiene (1,1) → (1,1) Presidente
-Relación: Juega (1,N) → (1,1) Partido (como local o visitante)
-Presidente (DNI, Nombre, Apellidos, FechaNacimiento, AñoElección, CódigoEquipo)
-
-Relación: Es presidente de (1,1) → (1,1) Equipo
-Partido (CódigoPartido, Fecha, GolesLocal, GolesVisitante, CódigoEquipoLocal, CódigoEquipoVisitante)
-
-Relación: Se juega entre (1,N) → (1,1) Equipo
-Gol (CódigoGol, Minuto, Descripción, CódigoPartido, CódigoJugador)
-
-Relación: Es marcado en (1,N) → (1,1) Partido
-Relación: Es marcado por (1,N) → (1,1) Jugador
+![Diagrama ER](https://github.com/johnfredyrg1226/base_datos2/blob/main/tarea/tarea4/equipo_futbol.drawio.png)
 
 # Modelo Relacional de Fútbol
 
