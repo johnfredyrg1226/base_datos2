@@ -25,7 +25,7 @@ poseída por empleados diferentes.
 
 ___Construye a través de diagrams.io.___
 <div align="justify">
-![empresas]()
+![empresas](https://github.com/johnfredyrg1226/base_datos2/blob/main/tarea/tarea5/empresas.drawio.png)
 ![Texto alternativo](ruta_de_la_imagen)
 
 
