@@ -26,7 +26,7 @@ poseída por empleados diferentes.
 ___Construye a través de diagrams.io.___
 <div align="justify">
 
-![Texto alternativo](https://github.com/johnfredyrg1226/base_datos2/blob/main/tarea/tarea5/empresas.drawio.png)
+![EMPRESA](https://github.com/johnfredyrg1226/base_datos2/blob/main/tarea/tarea5/empresas.drawio.png)
 
 
 ## Modelo Relacional: Organización Empresarial
