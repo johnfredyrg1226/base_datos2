@@ -1,6 +1,6 @@
 <div align="justify">
 
-<link rel="stylesheet" type="text/css" href="">
+<link rel="stylesheet" type="text/css" href="https://github.com/johnfredyrg1226/base_datos2/blob/main/tarea/tarea6/ejerciciopropuesto.css">
 
 
 # <img src=../../../../../images/computer.png width="40"> Code, Learn & Practice(Base de datos (Ejercicios de Normalización de Bases de Datos (1FN y 2FN)")
