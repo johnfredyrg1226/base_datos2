@@ -21,7 +21,9 @@
 
 > Verifica generando el modelo Entidad/Relación
 
-<h2 style="color: red; text-align: center;">RESULTADO:</h2>
+
+ <details>
+<summary style="cursor: pointer; color: red;">RESULTADO:</summary>
 
 # Tabla: Productos  
 | ID_Producto | Nombre_Producto | Categoría   | Precio |
@@ -35,6 +37,8 @@
 | **1**      | **Dell**   |
 | 1     | HP     |
 | **2**          | **Logitech**  |
+</details>
+
 
 
 ---
@@ -187,10 +191,10 @@ Este modelo ya está en una forma **bien normalizada**.
 > Verifica generando el modelo Entidad/Relación
 <details>
  <summary style="cursor: pointer; color: red;">RESULTADO:</summary>
+ <details>
+<summary style="cursor: pointer; color: red;">RESULTADO:</summary>
 
-# tabla: **Profesor**
-| ID_Profesor | Profesor   |   
-|--------------|------------|
+</details>
 |   1           |   prof. Pérez |
 |   2           |   prof. Gómez |
 
@@ -436,3 +440,5 @@ Este modelo ya está en una forma **bien normalizada**.
 
 
  </div>
+
+
