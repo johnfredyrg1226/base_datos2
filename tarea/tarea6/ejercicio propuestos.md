@@ -1,5 +1,7 @@
 <div align="justify">
 
+<link rel="stylesheet" type="text/css" href="">
+
 
 # <img src=../../../../../images/computer.png width="40"> Code, Learn & Practice(Base de datos (Ejercicios de Normalización de Bases de Datos (1FN y 2FN)")
 
