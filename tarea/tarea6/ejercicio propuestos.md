@@ -1,7 +1,5 @@
 <div align="justify">
 
-<link rel="stylesheet" type="text/css" href="https://github.com/johnfredyrg1226/base_datos2/blob/main/tarea/tarea6/ejerciciopropuesto.css">
-
 
 # <img src=../../../../../images/computer.png width="40"> Code, Learn & Practice(Base de datos (Ejercicios de Normalización de Bases de Datos (1FN y 2FN)")
 
@@ -23,7 +21,7 @@
 
 > Verifica generando el modelo Entidad/Relación
 
-<H2>RESULTADO:</H2>
+<h2 style="color: red; text-align: center;">RESULTADO:</h2>
 
 # Tabla: Productos  
 | ID_Producto | Nombre_Producto | Categoría   | Precio |
@@ -58,17 +56,48 @@
 > Verifica generando el modelo Entidad/Relación
 
 ---
-<H2>RESULTADO:</H2>
+<details>
+ <summary style="cursor: pointer; color: red;">RESULTADO:</summary>
 
-# Tabla: Cliente
-|  ID_Pedido  | Cliente | Dirección |
-|-------------|---------|-----------|
-| 101         | Juan Pérez | Calle 123 |
-| **102**         | **Ana Lopéz**  | **Av. Central** |
+# **tabla: Cliente**
+| ID_Cliente | Cliente    | Dirección     |
+|------------|------------|---------------|
+| 101        | Juan Pérez | Calle 123     |
+| 102        | Ana López  | Av. Central   |
 
-# Tabla: Producto
-| ID_Producto
 
+
+### **2. Tabla: `Pedidos`**  
+(Contiene la información sobre los pedidos, pero sin incluir los productos directamente)
+
+| ID_Pedido | ID_Cliente |  
+|-----------|------------|
+| 101       | 101        |
+| 102       | 102        |
+
+
+
+### **3. Tabla: Pedido_Productos**  
+(Contiene los productos de cada pedido, separando las multivaluaciones y las cantidades de productos)
+
+| ID_Pedido | ID_Producto | Cantidad | Precio_Unitario |  
+|-----------|-------------|----------|-----------------|  
+| 101       | 1           | 1        | 1000            |  
+| 102       | 2           | 2        | 50              |  
+
+
+### **4. Tabla: Productos**  
+(Contiene solo la información de los productos, sin repetirse en los pedidos)
+
+| ID_Producto | Producto | Precio  |
+|-------------|----------|---------|
+| 1           | Laptop   | 1000    |
+| 2           | Teclado  | 25      |
+
+Este modelo ya está en una forma **bien normalizada**.
+
+</details>
+---
 
 
 
@@ -87,6 +116,24 @@
 2. Aplicar **2FN**, asegurando que cada atributo dependa completamente de la clave primaria.
 
 > Verifica generando el modelo Entidad/Relación
+<details>
+ <summary style="cursor: pointer; color: red;">RESULTADO:</summary>
+
+
+# Tabla Empleado
+| Id_empleado | Nombre | Departamento |
+|-------------|--------|--------------|
+|   1   | Carlos R  |   ventas      |
+|   2   | Laura M   |  finanzas     |
+
+# Tabla Telefonos
+| Id_empleado |  Telefono |
+|-------------|--------------|
+|   1   |    12345 |
+|   1   |   67890   |
+|   2   |  54321   |
+</details>
+
 
 ---
 
@@ -105,7 +152,22 @@
 2. Aplicar **2FN**, asegurando que las dependencias parciales sean eliminadas.
 
 > Verifica generando el modelo Entidad/Relación
+<details>
+ <summary style="cursor: pointer; color: red;">RESULTADO:</summary>
 
+# Tabla Empleado
+| Id_empleado | Nombre | Departamento |
+|-------------|--------|--------------|
+|   1   | Carlos R  |   ventas      |
+|   2   | Laura M   |  finanzas     |
+
+# Tabla Telefonos
+| Id_empleado |  Telefono |
+|-------------|--------------|
+|   1   |    12345 |
+|   1   |   67890   |
+|   2   |  54321   |
+</details>
 ---
 
 ## **Ejercicio 5: Inscripciones a Cursos**
@@ -123,7 +185,35 @@
 2. Aplicar **2FN**, asegurando que cada campo dependa completamente de la clave primaria.
 
 > Verifica generando el modelo Entidad/Relación
+<details>
+ <summary style="cursor: pointer; color: red;">RESULTADO:</summary>
 
+# tabla: **Profesor**
+| ID_Profesor | Profesor   |   
+|--------------|------------|
+|   1           |   prof. Pérez |
+|   2           |   prof. Gómez |
+
+# tabla: **Curso**
+|   Id_curso    |   Curso   | 
+|---------------|-----------|
+|   20          |   Matematicas |  
+|   21          | Física    |
+
+# tabla: **Horario**
+|   ID_curso    | Horario   |
+|--------------|--------------------|
+|   20          | Lunes 10 AM   |
+|   20          | Miercoles 2PM |
+|   21          | Martes 3PM    |
+
+# tabla: **Alumno**
+| ID_ Alumno   |   ID_Incripción    |   Nombre  |
+|--------------|--------------------|-----------|
+|   100         |   3001            |   Luis R. |
+|   101          |  3002            |   Ana S.  |
+
+</details>
 ---
 
 ## **Ejercicio 6: Ventas de Tienda**
@@ -141,6 +231,37 @@
 2. Aplicar **2FN**, asegurando que cada atributo dependa completamente de la clave primaria.
 
 > Verifica generando el modelo Entidad/Relación
+
+<details>
+<summary style="cursor: pointer; color: red;">RESULTADO:</summary>
+
+# tabla: ** cliente **
+| id_Cliente    |   Cliente |
+|---------------|-----------|
+|   01          |   Juan P  |
+|   02          |   Andre M |
+
+# tabla: **Producto **
+| id_Producto|  Producto    |
+|   1001    |   Celular      |
+|   1002    |   Funda       |
+|   1003    |   Laptop      |
+
+# tabla: **Venta ** 
+| ID_Venta  |   total   |
+|-----------|-----------|
+|   8001    |   500     |
+|   8002    |   1000     |
+
+# tabla: **Venta_Producto**  (Tabla intermedia)
+| ID_Venta | id_Producto |
+|----------|-------------|
+| 8001     | 1001        |
+| 8001     | 1002        |
+| 8002     | 1003        |
+
+
+</details>
 
 ---
 
@@ -160,6 +281,29 @@
 
 > Verifica generando el modelo Entidad/Relación
 
+<details>
+<summary style="cursor: pointer; color: red;">RESULTADO:</summary>
+
+# tabla: **Libro**
+| Id_Libro  | Titulo     | Género              |
+|-----------|------------|---------------------|
+| 101       | El Quijote | Novela              |
+| 102       | 1984       | Ciencia Ficción     |
+
+# tabla: **Autores**
+| Id_autor  | Autor      |
+|-----------|------------|
+| 01        | Cervantes  |
+| 02        | Orwell     |
+
+# tabla: **Libro_Autor** (Tabla intermedia para la relación N:M)
+| Id_Libro  | Id_autor   |
+|-----------|------------|
+| 101       | 01         |
+| 102       | 02         |
+
+
+</details>
 ---
 
 ## **Ejercicio 8: Facturación de Servicios**
@@ -177,6 +321,37 @@
 2. Aplicar **2FN**, asegurando que cada atributo dependa completamente de la clave primaria.
 
 > Verifica generando el modelo Entidad/Relación
+<details>
+<summary style="cursor: pointer; color: red;">RESULTADO:</summary>
+
+# tabla: ** Cliente**
+|   Id_cliente  |   Cliente |   
+|---------------|-----------|
+|   01          |   Juan P. |
+|   02          |   Ana M.  |
+
+# tabla **Servicios**
+| Id_servicio   |   Serv_Contratados    |  precio   |
+|---------------|-----------------------|-----------|
+|   50          |   internet            |  50       |
+|   51          |   tv                  |   50      |
+|   52          |   telefono            |   20      |
+
+# tabla: ** Id_factura**
+| Id_factura    |   Id_cliente  |   Costo_total |
+|---------------|---------------|---------------|
+|   9001        |   01          |   50          |
+|   9002        |   02          |   20          |
+
+# tabla: **Factura_Servicio** (Tabla intermedia para relación N:M)
+| Id_factura | Id_servicio |
+|------------|------------|
+| 9001       | 1001       |
+| 9001       | 1002       |
+| 9002       | 1003       |
+
+
+</details>
 
 ---
 
@@ -196,6 +371,24 @@
 
 > Verifica generando el modelo Entidad/Relación
 
+<details>
+<summary style="cursor: pointer; color: red;">RESULTADO:</summary>
+
+# Tabla: **Marca**
+| ID_Marca | Marca   |
+|----------|--------|
+| 01       | Toyota |
+| 02       | Honda  |
+
+# Tabla: **Modelo**
+| ID_Modelo | Modelo  | ID_Marca | Año  |
+|-----------|--------|----------|------|
+| 1001      | Corolla | 01       | 2022 |
+| 1002      | Yaris   | 01       | 2022 |
+| 1003      | Civic   | 02       | 2023 |
+
+</details>
+
 ---
 
 ## **Ejercicio 10: Gestión de Proyectos**
@@ -213,5 +406,33 @@
 2. Aplicar **2FN**, asegurando que cada atributo dependa completamente de la clave primaria.
 
 > Verifica generando el modelo Entidad/Relación
+
+<details>
+<summary style="cursor: pointer; color: red;">RESULTADO:</summary>
+
+# Tabla: **Proyecto**
+| ID_Proyecto | Nombre      | Presupuesto |
+|------------|-------------|------------|
+| 7001       | Web App     | 5000       |
+| 7002       | E-commerce  | 10000      |
+
+# Tabla: **Miembro**
+| ID_Miembro | Nombre  |
+|------------|---------|
+| 01         | Juan    |
+| 02         | Ana     |
+| 03         | Pedro   |
+| 04         | María   |
+
+# Tabla: **Proyecto_Miembro** (relación N:M)
+| ID_Proyecto | ID_Miembro |
+|------------|------------|
+| 7001       | 01         |
+| 7001       | 02         |
+| 7002       | 03         |
+| 7002       | 04         |
+
+</details>
+
 
  </div>
