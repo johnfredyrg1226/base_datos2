@@ -98,8 +98,7 @@ Se eliminaron **grupos repetidos** (Direcciones y Categorías en una misma celda
 ---
 
 
-**<h2>formas normale
-**Tercera Forma Normal (3FN)**s</h2>**
+**<h2>formas normale</h2>**
  **Primera Forma Normal (1FN)**
 - Regla principal: Eliminar valores repetidos y asegurar que todos los atributos sean atómicos (indivisibles).
  Requisitos:
