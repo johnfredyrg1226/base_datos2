@@ -110,23 +110,23 @@ Se eliminaron **grupos repetidos** (Direcciones y Categorías en una misma celda
 
 **<h2>formas normales</h2>**
  **Primera Forma Normal (1FN)**
-🔹 Regla principal: Eliminar valores repetidos y asegurar que todos los atributos sean atómicos (indivisibles).
-🔹 Requisitos:
+- Regla principal: Eliminar valores repetidos y asegurar que todos los atributos sean atómicos (indivisibles).
+ Requisitos:
 
 - Cada columna debe contener solo un valor por celda.
 - No puede haber grupos repetidos (como listas o conjuntos de datos en una misma - celda).
 - Se debe identificar una clave primaria.
 
 **Segunda Forma Normal (2FN)**
-🔹 Regla principal: Eliminar dependencias parciales (un campo debe depender de toda la clave primaria, no de una parte).
-🔹 Requisitos:
+- Regla principal: Eliminar dependencias parciales (un campo debe depender de toda la clave primaria, no de una parte).
+- Requisitos:
 
 - Debe estar en 1FN.
 - Si hay clave compuesta, los atributos no clave deben depender completamente de toda la clave primaria.
 
 **Tercera Forma Normal (3FN)**
-🔹 Regla principal: Eliminar dependencias transitivas (un campo no clave debe depender directamente de la clave primaria, no de otro campo no clave).
-🔹 Requisitos:
+- Regla principal: Eliminar dependencias transitivas (un campo no clave debe depender directamente de la clave primaria, no de otro campo no clave).
+ Requisitos:
 
 Debe estar en 2FN.
 Ningún atributo no clave debe depender de otro atributo no clave.
