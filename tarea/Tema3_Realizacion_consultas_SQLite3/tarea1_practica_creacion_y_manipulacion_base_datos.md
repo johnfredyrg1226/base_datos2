@@ -402,7 +402,6 @@ sqlite> select * from ejemplo;
 | 11 | Ejemplo50  | 75     | 85.3    | 2026-06-11 | 1        |
 
 sqlite>
-
 **sqlite> update ejemplo set entero = ('entero' + 10)
    ...> where booleano is false;
 sqlite> select * from ejemplo;**
