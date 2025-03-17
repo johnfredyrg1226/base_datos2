@@ -476,8 +476,6 @@ s
 sqlite> select nombre, substr(nombre, 1, 3) as primeros_3_caracteres
    ...> from empleados;
 ```
-</details>
-
 |  nombre   | primeros_3_caracteres |
 |-----------|-----------------------|
 | Juan      | Jua                   |
@@ -500,6 +498,9 @@ sqlite> select nombre, substr(nombre, 1, 3) as primeros_3_caracteres
 | Natalia   | Nat                   |
 | Roberto   | Rob                   |
 | Beatriz   | Bea                   |
+
+</details>
+
 
 
 
