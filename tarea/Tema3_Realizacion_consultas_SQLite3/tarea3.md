@@ -252,6 +252,7 @@ sqlite> select cast('123' as integer);
 ```sql
 sqlite> select nombre || departamento from empleados;
 ```
+
 |  nombre || departamento  |
 |--------------------------|
 | JuanVentas               |
@@ -430,16 +431,33 @@ sqlite> select nombre, length(nombre) as log_nombre
 
 <details>
 <summary style= "color: red"> Resultado </summary>
+
 ```sql
-s
+sqlite> select count(nombre), departamento
+   ...> from empleados 
+   ...> group by departamento;
 ```
+| count(nombre) |   departamento   |
+|---------------|------------------|
+| 6             | Recursos Humanos |
+| 7             | TI               |
+| 7             | Ventas           |
+
+
 </details>- Funciones de Fecha y Hora (CURRENT_TIME):
   - Muestra la hora actual.
 <details>
 <summary style= "color: red"> Resultado </summary>
+
 ```sql
-s
+sqlite> select time('now');
 ```
+
+| time('now') |
+|-------------|
+| 21:13:34    |
+
+
 </details>
 - Funciones de Conversión (CAST):
   - Convierte el salario a un valor de punto flotante.
@@ -451,21 +469,201 @@ s
 </details>
 - Funciones de Manipulación de Cadenas (SUBSTR):
   - Muestra los primeros tres caracteres de cada nombre de empleado.
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+```sql
+sqlite> select nombre, substr(nombre, 1, 3) as primeros_3_caracteres
+   ...> from empleados;
+```
+</details>
+
+|  nombre   | primeros_3_caracteres |
+|-----------|-----------------------|
+| Juan      | Jua                   |
+| María     | Mar                   |
+| Carlos    | Car                   |
+| Ana       | Ana                   |
+| Pedro     | Ped                   |
+| Laura     | Lau                   |
+| Javier    | Jav                   |
+| Carmen    | Car                   |
+| Miguel    | Mig                   |
+| Elena     | Ele                   |
+| Diego     | Die                   |
+| Sofía     | Sof                   |
+| Andrés    | And                   |
+| Isabel    | Isa                   |
+| Raúl      | Raú                   |
+| Patricia  | Pat                   |
+| Alejandro | Ale                   |
+| Natalia   | Nat                   |
+| Roberto   | Rob                   |
+| Beatriz   | Bea                   |
+
+
 
 - __Order By__ and __Like__.
   - Empleados en el departamento de 'Ventas' con salarios superiores a 52000.
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+```sql
+sqlite> select nombre,salario,departamento
+   ...> from empleados
+   ...> where salario > 25000
+   ...> group by departamento;
+```
+
+| nombre | salario |   departamento   |
+|--------|---------|-----------------|
+| Ana    | 48000.0 | Recursos Humanos |
+| María  | 60000.0 | TI               |
+| Juan   | 50000.0 | Ventas           |
+
+## se puede utilizar la condicion despues de agruparlo pero debes de utilizar having.
+
+```sql
+**Usa WHERE si el filtro es antes de GROUP BY.**
+**Usa HAVING si el filtro es después de GROUP BY.**
+
+No puedes usar HAVING en lugar de WHERE si no estás utilizando una función agregada (como AVG(), SUM(), COUNT()).
+
+📌 HAVING solo funciona después de GROUP BY y para filtrar resultados agregados.
+```
+
+</details>
   - Empleados cuyos nombres contienen la letra 'a' y tienen salarios ordenados de manera ascendente.
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+```sql
+sqlite> select nombre,salario,departamento
+   ...> from empleados
+   ...> where nombre like '%a%'
+   ...> order by salario asc;
+```
+
+|  nombre   | salario |   departamento   |
+|-----------|---------|------------------|
+| Patricia  | 47000.0 | Recursos Humanos |
+| Ana       | 48000.0 | Recursos Humanos |
+| Javier    | 48000.0 | Recursos Humanos |
+| Sofía     | 49000.0 | Ventas           |
+| Juan      | 50000.0 | Ventas           |
+| Laura     | 52000.0 | Ventas           |
+| Isabel    | 53000.0 | TI               |
+| Natalia   | 54000.0 | Ventas           |
+| Carlos    | 55000.0 | Ventas           |
+| Elena     | 55000.0 | Recursos Humanos |
+| María     | 60000.0 | TI               |
+| Andrés    | 60000.0 | Recursos Humanos |
+| Beatriz   | 63000.0 | TI               |
+| Carmen    | 65000.0 | TI               |
+| Raúl      | 68000.0 | Ventas           |
+| Alejandro | 71000.0 | TI               |
+
+
+</details>
   - Empleados en el departamento 'Recursos Humanos' con salarios entre 45000 y 55000.
+<details>
+<summary style= "color: red"> Resultado </summary>
+```sql
+sqlite> select nombre,salario,departamento
+   ...> from empleados
+   ...> where departamento ='Recursos Humanos'
+   ...> and salario between 45000 and 55000;
+```
+
+|  nombre  | salario |   departamento   |
+|---------|---------|-----------------|
+| Ana      | 48000.0 | Recursos Humanos |
+| Javier   | 48000.0 | Recursos Humanos |
+| Elena    | 55000.0 | Recursos Humanos |
+| Patricia | 47000.0 | Recursos Humanos |
+| Roberto  | 49000.0 | Recursos Humanos |
+
+
+</details>
   - Empleados con salarios en orden descendente, limitando a los primeros 5 resultados.
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+```sql
+sqlite> select nombre,salario
+   ...> from empleados
+   ...> order by salario desc
+   ...> limit 5;
+```
+
+|  nombre   | salario |
+|-----------|---------|
+| Diego     | 72000.0 |
+| Alejandro | 71000.0 |
+| Pedro     | 70000.0 |
+| Raúl      | 68000.0 |
+| Carmen    | 65000.0 |
+
+
+</details>
   - Empleados cuyos nombres comienzan con 'M' o 'N' y tienen salarios superiores a 50000.
+<details>
+<summary style= "color: red"> Resultado </summary>
+```sql
+s
+```
+</details>
   - Empleados en el departamento 'TI' o 'Ventas' ordenados alfabéticamente por nombre.
+<details>
+<summary style= "color: red"> Resultado </summary>
+```sql
+s
+```
+</details>
   - Empleados con salarios únicos (eliminando duplicados) en orden ascendente.
+<details>
+<summary style= "color: red"> Resultado </summary>
+```sql
+s
+```
+</details>
   - Empleados cuyos nombres terminan con 'o' o 'a' y están en el departamento 'Ventas'.
+<details>
+<summary style= "color: red"> Resultado </summary>
+```sql
+s
+```
+</details>
   - Empleados con salarios fuera del rango de 55000 a 70000, ordenados por departamento.
+<details>
+<summary style= "color: red"> Resultado </summary>
+```sql
+s
+```
+</details>
   - Empleados en el departamento 'Recursos Humanos' con nombres que no contienen la letra 'e'.
+<details>
+<summary style= "color: red"> Resultado </summary>
+```sql
+s
+```
+</details>
+
+
 
 ### Generación Informe
 
 Genera un informe con cada una de las consultas y los resuldos obtenidos tras su ejecución. El informe se debe de realizar en __markdown, y enviar el enlace__.
 
 </div>
+
+
+SELECT COUNT(nombre), departamento
+FROM empleados
+
+
+GROUP BY departamento
+
+
+
+ORDER BY departamento;
