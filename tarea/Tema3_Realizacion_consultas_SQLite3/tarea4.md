@@ -105,7 +105,8 @@ s
 
 ## Diagrama Entidad-Relación
 
-![Diagrama ER](https://github.com/johnfredyrg1226/base_datos2/blob/main/tarea/tarea4/equipo_futbol.drawio.png)
+![Diagrama ER](https://github.com/johnfredyrg1226/base_datos2/raw/main/tarea/Tema3_Realizacion_consultas_SQLite3/tarea4_ER_.drawio.png)
+
 
 ```sql
 s
