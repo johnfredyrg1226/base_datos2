@@ -610,44 +610,161 @@ sqlite> select nombre,salario
   - Empleados cuyos nombres comienzan con 'M' o 'N' y tienen salarios superiores a 50000.
 <details>
 <summary style= "color: red"> Resultado </summary>
+
 ```sql
-s
+sqlite> SELECT * FROM empleados
+WHERE LOWER(nombre) REGEXP '^[mn]'
+AND salario > 50000;
 ```
+
+**LOWER(nombre) convierte el nombre a minúsculas.**
+
+**UPPER(nombre) convierte el nombre a mayúsculas.**
+
+```sql
+sqlite> SELECT * FROM empleados
+WHERE nombre REGEXP '^[MN]'
+AND salario > 50000;
+```
+
+| id | nombre  | salario | departamento |
+|----|---------|---------|--------------|
+| 2  | María   | 60000.0 | TI           |
+| 9  | Miguel  | 51000.0 | Ventas       |
+| 18 | Natalia | 54000.0 | Ventas       |
 </details>
   - Empleados en el departamento 'TI' o 'Ventas' ordenados alfabéticamente por nombre.
 <details>
 <summary style= "color: red"> Resultado </summary>
+
 ```sql
-s
+sqlite> SELECT nombre, departamento 
+FROM empleados
+WHERE departamento REGEXP '^[T]'
+ORDER BY nombre ASC;
 ```
+
+|  nombre   | departamento |
+|-----------|--------------|
+| Alejandro | TI           |
+| Beatriz   | TI           |
+| Carmen    | TI           |
+| Diego     | TI           |
+| Isabel    | TI           |
+| María     | TI           |
+| Pedro     | TI           |
+
+
 </details>
   - Empleados con salarios únicos (eliminando duplicados) en orden ascendente.
 <details>
 <summary style= "color: red"> Resultado </summary>
+
 ```sql
-s
+sqlite> SELECT DISTINCT salario, nombre
+FROM empleados
+ORDER BY salario ASC;
 ```
+
+| salario |  nombre   |
+|---------|-----------|
+| 47000.0 | Patricia  |
+| 48000.0 | Ana       |
+| 48000.0 | Javier    |
+| 49000.0 | Sofía     |
+| 49000.0 | Roberto   |
+| 50000.0 | Juan      |
+| 51000.0 | Miguel    |
+| 52000.0 | Laura     |
+| 53000.0 | Isabel    |
+| 54000.0 | Natalia   |
+| 55000.0 | Carlos    |
+| 55000.0 | Elena     |
+| 60000.0 | María     |
+| 60000.0 | Andrés    |
+| 63000.0 | Beatriz   |
+| 65000.0 | Carmen    |
+| 68000.0 | Raúl      |
+| 70000.0 | Pedro     |
+| 71000.0 | Alejandro |
+| 72000.0 | Diego     |
+
+
 </details>
   - Empleados cuyos nombres terminan con 'o' o 'a' y están en el departamento 'Ventas'.
 <details>
 <summary style= "color: red"> Resultado </summary>
+
 ```sql
-s
+sqlite> SELECT nombre, departamento FROM empleados
+   ...> where nombre REGEXP '[oa]$'
+   ...> AND departamento = "Ventas";
 ```
+
+| nombre  | departamento |
+|---------|--------------|
+| Laura   | Ventas       |
+| Sofía   | Ventas       |
+| Natalia | Ventas       |
+
 </details>
   - Empleados con salarios fuera del rango de 55000 a 70000, ordenados por departamento.
 <details>
 <summary style= "color: red"> Resultado </summary>
+
 ```sql
-s
+sqlite> select nombre, departamento from empleados
+   ...> where salario REGEXP '[<55000 | >70000]'
+   ...> order by departamento;
 ```
+
+|  nombre   |   departamento   |
+|-----------|------------------|
+| Ana       | Recursos Humanos |
+| Javier    | Recursos Humanos |
+| Elena     | Recursos Humanos |
+| Andrés    | Recursos Humanos |
+| Patricia  | Recursos Humanos |
+| Roberto   | Recursos Humanos |
+| María     | TI               |
+| Pedro     | TI               |
+| Carmen    | TI               |
+| Diego     | TI               |
+| Isabel    | TI               |
+| Alejandro | TI               |
+| Beatriz   | TI               |
+| Juan      | Ventas           |
+| Carlos    | Ventas           |
+| Laura     | Ventas           |
+| Miguel    | Ventas           |
+| Sofía     | Ventas           |
+| Raúl      | Ventas           |
+| Natalia   | Ventas           |
+
+
 </details>
   - Empleados en el departamento 'Recursos Humanos' con nombres que no contienen la letra 'e'.
 <details>
 <summary style= "color: red"> Resultado </summary>
+
 ```sql
-s
+sqlite> select nombre from empleados
+   ...> where nombre REGEXP '^[^Ee]*$';
 ```
+|  nombre  |
+|----------|
+| Juan     |
+| María    |
+| Carlos   |
+| Ana      |
+| Laura    |
+| Sofía    |
+| Andrés   |
+| Raúl     |
+| Patricia |
+| Natalia  |
+
+
 </details>
 
 
