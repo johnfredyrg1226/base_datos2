@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../../images/computer.png width="40"> Code, Learn & Practice(Base de datos (Trabajo con funciones en BBDD")
+## Code, Learn & Practice(Base de datos (Trabajo con funciones en BBDD")
 
 <div align="center">
 <img src="https://i0.wp.com/hunna.org/wp-content/uploads/2014/06/huellas.jpg?resize=324%2C215" width="500px"/>
@@ -17,6 +17,15 @@ _Practicar la creación y manipulación de una base de datos SQLite3 desde la l�
 ### Paso 1: Creación de la BBDD
 
 Crea con el siguente contenido el fichero __supermercado-dump.sql__.
+
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+```sql
+s
+```
+</details>
+
 
 ```sql
 CREATE TABLE productos (
@@ -79,20 +88,90 @@ sqlite3 tarea4.db
 
 Haciendo un __.read__ del fichero __sql__, de nombre __supermercado-db.sql__, realiza la creación e inserción de información de la __BBDD__.
 
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+```sql
+s
+```
+</details>
+
 ### Paso 3: Responde a las siguientes cuestiones
 
 - Realiza el diagrama __ER__ de la __BBDD__ supermercado.
+
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+## Diagrama Entidad-Relación
+
+![Diagrama ER](https://github.com/johnfredyrg1226/base_datos2/blob/main/tarea/tarea4/equipo_futbol.drawio.png)
+
+```sql
+s
+```
+</details>
+
 - Realiza el diagrama __MR__ de la __BBDD__ supermercado.
+
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+```sql
+s
+```
+</details>
+
+
 - Indica si la BBDD esta __normalizada__ hasta la 3ª forma normal, justificando la respuesta.
+
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+```sql
+s
+```
+</details>
 
 ### Paso 4: Responde a las siguientes cuestiones
 
 Realiza las siguientes consultas, y muestra el resultado obtenido:
 
 - Mostrar todos los productos de la categoría "Bebidas".
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+```sql
+s
+```
+</details>
+
 - Listar los productos ordenados por precio de forma descendente.
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+```sql
+s
+```
+</details>
 - Calcular el precio total de todos los productos en la tabla "productos".
+- 
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+```sql
+s
+```
+</details>
 - Encontrar los productos con un nombre que contenga la letra 'a'.
+
+<details>
+<summary style= "color: red"> Resultado </summary>
+
+```sql
+s
+```
+</details>
 - Obtener la cantidad total de productos vendidos en todas las fechas.
 - Encontrar el producto más caro en cada categoría.
 - Listar los productos que no han sido vendidos.

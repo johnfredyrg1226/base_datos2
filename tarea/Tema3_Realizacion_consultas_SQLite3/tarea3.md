@@ -775,13 +775,3 @@ Genera un informe con cada una de las consultas y los resuldos obtenidos tras su
 
 </div>
 
-
-SELECT COUNT(nombre), departamento
-FROM empleados
-
-
-GROUP BY departamento
-
-
-
-ORDER BY departamento;

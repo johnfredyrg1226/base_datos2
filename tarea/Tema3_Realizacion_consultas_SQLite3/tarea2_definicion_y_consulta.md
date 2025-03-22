@@ -87,7 +87,7 @@ Dado el siguiente conjunto de información:
 | 10             | Lucia       | Castillo    | 88888888J | Nissan     | Altima     | 2017 |
 | 11             | Luis        | Gonzalez    | 99999999K | Chevrolet  | Malibu     | 2019 |
 | 12             | Marta       | Diaz        | 10101010L | Toyota     | Camry      | 2020 |
-| 13             | Victor      | Vargas      | 11111112M | Honda      | Accord     | 2018 |
+| 13             | Victor      | Vargas      | 11where V.marca = 'Toyota';111112M | Honda      | Accord     | 2018 |
 | 14             | Elena       | Castro      | 12121212N | Ford       | Explorer   | 2021 |
 | 15             | Roberto     | Blanco      | 13131313O | Nissan     | Rogue      | 2017 |
 | 16             | Natalia     | Paredes     | 14141414P | Volkswagen | Jetta      | 2019 |
@@ -289,6 +289,7 @@ sqlite> select * from Vehiculos
 - Seleccionar propietarios que tienen vehículos de la marca "Toyota".
 <details > 
 <summary style="color: red;"> RESULTADO </summary>
+
 **sqlite> select * from Propietarios P 
    ...> inner join Vehiculos V on V.id_vehiculo = P.id
    ...> where V.marca = 'Toyota';**
@@ -388,7 +389,7 @@ sqlite> select * from Vehiculos
 | id_vehiculo | marca  | modelo | anio | id_propietario |
 |-------------|--------|--------|------|----------------|
 | 3           | Nissan | Sentra | 2020 | 3              |
-| 10          | Nissan | Altima | 2017 | 10             |
+| 10          | Nissan | Altima | 2017 | 10     where V.marca = 'Toyota';        |
 | 15          | Nissan | Rogue  | 2017 | 15             |
 | 20          | Nissan | Murano | 2019 | 20             |
 
