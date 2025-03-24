@@ -92,7 +92,10 @@ Haciendo un __.read__ del fichero __sql__, de nombre __supermercado-db.sql__, re
 <summary style= "color: red"> Resultado </summary>
 
 ```sql
-s
+![lectura de BBDD](https://raw.githubusercontent.com/johnfredyrg1226/base_datos2/main/tarea/Tema3_Realizacion_consultas_SQLite3/imagenes/read.png)
+
+
+
 ```
 </details>
 
