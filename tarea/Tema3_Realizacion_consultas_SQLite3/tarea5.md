@@ -13,7 +13,15 @@ _Practicar la creación y manipulación de una base de datos SQLite3 desde la l�
 
 ### Paso 1: Creación de la BBDD
 
-Crea con el siguente contenido el fichero __supermercado-dump.sql__.
+## Crea con el siguente contenido el fichero biblioteca_db.sql.
+
+<details> 
+<summary style="color: red;" > Resultado </summary>
+
+![Imagen de terminal creacion DDBB](https://raw.githubusercontent.com/johnfredyrg1226/base_datos2/main/tarea/Tema3_Realizacion_consultas_SQLite3/imagenes/tarea5_imagen_creacion_ddbb.png)
+
+</details>
+
 
 ```SQL
 -- Elimino la tabla autor si exite
@@ -74,15 +82,36 @@ INSERT INTO libro (titulo, autor_id, editorial, precio) VALUES
 ## PASO DOS PRACTICAR CON LAS CONSULTAS.
 
 
+
 -- Selección de libros cuyo título comienza con "H".
 <details> 
 <summary style="color: red;" > Resultado </summary>
 
+```sql
+sqlite> select titulo from libro
+   ...> where titulo REGEXP '^[hH]';
+
+sqlite> SELECT titulo FROM libro
+WHERE titulo LIKE 'H%' OR titulo LIKE 'h%';
+
+** no hay ningun titulo comience con H.
+```
 </details>
 
 -- Libros escritos por autores cuyos nombres terminan con "ing".
 <details> 
 <summary style="color: red;" > Resultado </summary>
+
+```sql
+sqlite> select nombre from autor
+   ...> where nombre REGEXP 'ing$';
++--------------+
+|    nombre    |
++--------------+
+| J.K. Rowling |
+| Stephen King |
++--------------+
+```
 
 </details>
 
