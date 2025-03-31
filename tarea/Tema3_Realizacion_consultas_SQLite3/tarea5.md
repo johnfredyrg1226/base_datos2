@@ -405,7 +405,8 @@ sqlite> select titulo from libro
 -- Obtener todos los autores cuyo nombre no contiene la letra "r":
 <details> 
 <summary style="color: red;" > Resultado </summary>
-``'sql
+
+```sql
 sqlite> SELECT nombre FROM autor
 WHERE nombre NOT REGEXP '[rR]';
 +--------------+
@@ -553,51 +554,180 @@ sqlite> select titulo from libro
 
 </details>
 -- Obtener todos los autores cuyo nombre tiene al menos una letra mayúscula:
-<details> 
-<summary style="color: red;" > Resultado </summary>
 
-</details>
+```sql
+sqlite> select nombre from autor 
+   ...> where nombre regexp '[A-Z]'
+   ...> ;
++-----------------+
+|     nombre      |
++-----------------+
+| J.K. Rowling    |
+| Stephen King    |
+| George Orwell   |
+| Jane Austen     |
+| Agatha Christie |
++-----------------+
+
+```
+
 -- Seleccionar los libros cuyo precio es un número decimal con exactamente dos decimales:
-<details> 
-<summary style="color: red;" > Resultado </summary>
 
-</details>
--- Obtener todos los autores cuyo nombre no contiene números:
-<details> 
-<summary style="color: red;" > Resultado </summary>
+```sql
+sqlite> SELECT titulo, precio FROM libro
+WHERE precio REGEXP '^\d+\.\d{2}$';
++-----------------------------------+--------+
+|              titulo               | precio |
++-----------------------------------+--------+
+| The Great Gatsby                  | 20.99  |
+| To Kill a Mockingbird             | 15.95  |
+| The Catcher in the Rye            | 18.75  |
+| Brave New World                   | 17.99  |
+| The Hobbit                        | 24.99  |
+| The Chronicles of Narnia          | 28.99  |
+| The Odyssey                       | 14.95  |
+| The Iliad                         | 14.95  |
+| Moby-Dick                         | 19.99  |
+| The Road                          | 16.75  |
+| Wuthering Heights                 | 12.99  |
+| The Old Man and the Sea           | 18.95  |
+| The Count of Monte Cristo         | 27.99  |
+| The Adventures of Sherlock Holmes | 16.99  |
+| Frankenstein                      | 13.25  |
+| The Prince                        | 10.99  |
+| Don Quixote                       | 26.75  |
+| Anna Karenina                     | 23.99  |
+| Les Misérables                    | 29.75  |
+| The Jungle Book                   | 14.99  |
+| War and Peace                     | 33.25  |
+| Crime and Punishment              | 19.99  |
++-----------------------------------+--------+
 
-</details>
--- Seleccionar los libros cuyo título contiene al menos tres vocales:
-<details> 
-<summary style="color: red;" > Resultado </summary>
+```
+## Obtener todos los autores cuyo nombre no contiene números:
 
-</details>
--- Obtener todos los autores cuyo nombre inicia con una consonante:
-<details> 
-<summary style="color: red;" > Resultado </summary>
+```sql
+sqlite> select nombre from autor 
+   ...> where nombre not regexp '[0-9]';
++-----------------+
+|     nombre      |
++-----------------+
+| J.K. Rowling    |
+| Stephen King    |
+| George Orwell   |
+| Jane Austen     |
+| Agatha Christie |
++-----------------+
+```
+## Seleccionar los libros cuyo título contiene al menos tres vocales:
 
-</details>
--- Seleccionar los libros cuyo título no contiene la palabra "Science":
-<details> 
-<summary style="color: red;" > Resultado </summary>
+```sql
+sqlite> SELECT titulo FROM libro
+WHERE titulo REGEXP '[aeiouAEIOU].*[aeiouAEIOU].*[aeiouAEIOU]';
++-----------------------------------+
+|              titulo               |
++-----------------------------------+
+| The Great Gatsby                  |
+| To Kill a Mockingbird             |
+| The Catcher in the Rye            |
+| One Hundred Years of Solitude     |
+| Brave New World                   |
+| The Hobbit                        |
+| The Lord of the Rings             |
+| The Chronicles of Narnia          |
+| The Odyssey                       |
+| The Iliad                         |
+| The Road                          |
+| The Grapes of Wrath               |
+| Wuthering Heights                 |
+| The Old Man and the Sea           |
+| The Count of Monte Cristo         |
+| The Picture of Dorian Gray        |
+| The Adventures of Sherlock Holmes |
+| Frankenstein                      |
+| Alice's Adventures in Wonderland  |
+| The Prince                        |
+| Don Quixote                       |
+| The Divine Comedy                 |
+| Anna Karenina                     |
+| Les Misérables                    |
+| The Jungle Book                   |
+| The Wind in the Willows           |
+| War and Peace                     |
+| Crime and Punishment              |
++-----------------------------------+
 
-</details>
--- Obtener todos los autores cuyo nombre tiene al menos una letra repetida consecutivamente:
-<details> 
-<summary style="color: red;" > Resultado </summary>
+```
+## Obtener todos los autores cuyo nombre inicia con una consonante:
 
-</details>
--- Obtener todos los autores cuyo nombre empieza con "M" o termina con "n":
-<details> 
-<summary style="color: red;" > Resultado </summary>
+```sql
+SELECT nombre FROM autor
+WHERE nombre REGEXP '^[^aeiouAEIOU]';
 
-</details>
--- Obtener todos los autores cuyo nombre no contiene caracteres especiales:
-<details> 
-<summary style="color: red;" > Resultado </summary>
 
-</details>
+```
+## Seleccionar los libros cuyo título no contiene la palabra "Science":
 
+```sql
+sqlite> SELECT nombre FROM autor
+WHERE nombre REGEXP '^[^aeiouAEIOU]';
++---------------+
+|    nombre     |
++---------------+
+| J.K. Rowling  |
+| Stephen King  |
+| George Orwell |
+| Jane Austen   |
++---------------+
+
+```
+## Obtener todos los autores cuyo nombre tiene al menos una letra repetida consecutivamente:
+
+```sql
+SELECT nombre FROM autor
+WHERE nombre REGEXP '(.)\1';
+
+Explicación del patrón (.)\1:
+(.) → Captura cualquier carácter (letra, número o símbolo).
+
+\1 → Hace referencia al mismo carácter capturado antes, es decir, busca una repetición consecutiva de cualquier carácter.
+```
+## Obtener todos los autores cuyo nombre empieza con "M" o termina con "n":
+
+```sql
+SELECT nombre FROM autor
+WHERE nombre REGEXP '^M|n$';
+
+Explicación del patrón '^M|n$':
+^M → Coincide con nombres que comienzan con "M" (^ indica el inicio).
+
+n$ → Coincide con nombres que terminan con "n" ($ indica el final).
+
+| → Es el operador "o" en expresiones regulares, por lo que se cumple cualquiera de las dos condiciones.
+```
+## Obtener todos los autores cuyo nombre no contiene caracteres especiales:
+
+```sql
+sqlite> SELECT nombre FROM autor
+WHERE nombre NOT REGEXP '[^a-zA-Z ]';
++-----------------+
+|     nombre      |
++-----------------+
+| Stephen King    |
+| George Orwell   |
+| Jane Austen     |
+| Agatha Christie |
++-----------------+
+
+ Explicación del patrón [^a-zA-Z ]:
+[^...] → La negación dentro de corchetes significa "buscar cualquier carácter que no esté en esta lista".
+
+a-zA-Z → Permite solo letras mayúsculas y minúsculas.
+
+' ' (espacio) → Permite espacios en los nombres compuestos.
+
+NOT REGEXP → Filtra los nombres que no contienen caracteres especiales.
+```
 
 
 </div>
