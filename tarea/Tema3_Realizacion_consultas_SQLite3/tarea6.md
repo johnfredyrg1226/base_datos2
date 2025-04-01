@@ -191,20 +191,150 @@ sqlite> select avg(precio)as precio_promedio_productos from productos;
 **Obtener los clientes que tienen un email válido (contiene '@').** 
  
 ```sql
-SELECT * FROM Clientes WHERE email REGEXP '@';
+sqlite> select email from clientes
+   ...> where email regexp '@';
++---------------------------+
+|           email           |
++---------------------------+
+| alejandro@example.com     |
+| ana@example.com           |
+| andres@example.com        |
+| antonio@example.com       |
+| beatriz@example.com       |
+| carlos.gomez@example.com  |
+| carlos@example.com        |
+| carmen@example.com        |
+| celia@example.com         |
+| clara.sanchez@example.com |
+| daniel@example.com        |
+| david@example.com         |
+| elena@example.com         |
+| eva.torres@example.com    |
+| francisco@example.com     |
+| isabel@example.com        |
+| javier@example.com        |
+| juan@example.com          |
+| laura@example.com         |
+| lucia@example.com         |
+| luisa@example.com         |
+| maria@example.com         |
+| marina@example.com        |
+| mario@example.com         |
+| miguel@example.com        |
+| pedro@example.com         |
+| raquel@example.com        |
+| roberto@example.com       |
+| sofia@example.com         |
++---------------------------+
 ```
 
 **Obtener el producto más caro.**  
-```sql```
 
-**Obtener los pedidos realizados en febrero de 2024.**  
-```sql```
+```sql
+sqlite> select max(precio)as precio_mas_alto from productos;
++-----------------+
+| precio_mas_alto |
++-----------------+
+| 1200.0          |
++-----------------+
+sqlite> select nombre, max(precio)as precio_mas_caro from productos;
++--------+-----------------+
+| nombre | precio_mas_caro |
++--------+-----------------+
+| Laptop | 1200.0          |
++--------+-----------------+
+
+```
+
+**Obtener los pedidos realizados en febrero de 2024.** 
+
+```sql
+FROM pedidos 
+WHERE fecha_pedido BETWEEN '2024-02-01' AND '2024-02-29';
++-----------+--------------+
+| id_pedido | fecha_pedido |
++-----------+--------------+
+| 1         | 2024-02-01   |
+| 2         | 2024-02-02   |
+| 3         | 2024-02-03   |
+| 4         | 2024-02-04   |
+| 5         | 2024-02-05   |
+| 6         | 2024-02-06   |
+| 7         | 2024-02-07   |
+| 8         | 2024-02-08   |
+| 9         | 2024-02-09   |
+| 10        | 2024-02-10   |
+| 11        | 2024-02-11   |
+| 12        | 2024-02-12   |
+| 13        | 2024-02-13   |
+| 14        | 2024-02-14   |
+| 15        | 2024-02-15   |
+| 16        | 2024-02-16   |
+| 17        | 2024-02-17   |
+| 18        | 2024-02-18   |
+| 19        | 2024-02-19   |
+| 20        | 2024-02-20   |
+| 21        | 2024-02-21   |
+| 22        | 2024-02-22   |
+| 23        | 2024-02-23   |
+| 24        | 2024-02-24   |
+| 25        | 2024-02-25   |
+| 26        | 2024-02-26   |
+| 27        | 2024-02-27   |
+| 28        | 2024-02-28   |
+| 29        | 2024-02-29   |
++-----------+--------------+
+
+```
 
 **Obtener la cantidad total de productos en todos los pedidos por producto.**  
-```sql```
 
-**Obtener los clientes que han realizado más de un pedido.**  
-```sql```
+```sql
+sqlite> SELECT pr.nombre, SUM(p.cantidad) AS cantidad_total
+FROM pedidos p
+INNER JOIN productos pr ON pr.id = p.id_producto
+GROUP BY pr.id, pr.nombre
+ORDER BY cantidad_total DESC;
++-----------------------------------+----------------+
+|              nombre               | cantidad_total |
++-----------------------------------+----------------+
+| TV LED                            | 3              |
+| Cámara Digital                    | 3              |
+| Ratón Óptico                      | 3              |
+| Router Wi-Fi                      | 3              |
+| Cargador Inalámbrico              | 3              |
+| Hub USB                           | 3              |
+| Laptop                            | 2              |
+| Auriculares Bluetooth             | 2              |
+| Reproductor de Audio              | 2              |
+| Reloj Inteligente                 | 2              |
+| Mochila para Portátil             | 2              |
+| Lámpara LED                       | 2              |
+| Estuche para Auriculares          | 2              |
+| Funda para Tablet                 | 2              |
+| Webcam HD                         | 2              |
+| Adaptador HDMI                    | 2              |
+| Smartphone                        | 1              |
+| Tablet                            | 1              |
+| Impresora                         | 1              |
+| Altavoces Inalámbricos            | 1              |
+| Teclado Inalámbrico               | 1              |
+| Monitor LED                       | 1              |
+| Disco Duro Externo                | 1              |
+| Batería Externa                   | 1              |
+| Tarjeta de Memoria                | 1              |
+| Kit de Limpieza para Computadoras | 1              |
+| Soporte para Teléfono             | 1              |
+| Funda para Laptop                 | 1              |
++-----------------------------------+----------------+
+
+```
+
+**Obtener los clientes que han realizado más de un pedido.** 
+
+```sql
+
+```
 
 **Obtener los productos que tienen un precio registrado.**  
 ```sql```
