@@ -235,7 +235,8 @@ join clases cl on cl.id = inc.id_clase;
 
 - Obtener el nombre del alumno, la edad y la materia de las clases en las que está inscrito.
 - Obtener el nombre del alumno, la dirección y el profesor de las clases en las que está inscrito.
-- Obtener el nombre del alumno y la materia de las clases en las que está inscrito, ordenado por el nombre del alumno.
+- 
+## Obtener el nombre del alumno y la materia de las clases en las que está inscrito, ordenado por el nombre del alumno.
 
 ```sql
 select al.nombre, cl.materia
@@ -260,4 +261,66 @@ order by al.nombre ;
 
 ```
 - Contar cuántos alumnos están inscritos en cada clase.
+
+
+## Ejercicios propuestos mios 
+
+## Obtener el nombre del alumno, el nombre de la clase y la materia, pero solo para aquellos alumnos que están inscritos en clases de la materia 'Matemáticas'.
+```sql
+sqlite> select al.nombre, cl.nombre as nombre_clase, cl.materia
+from alumnos al 
+join inscripciones inc on inc.id_alumno = al.id
+join clases cl on cl.id = inc.id_clase
+where cl.materia = "Matemáticas";
++--------+-----------------+-------------+
+| nombre |  nombre_clase   |   materia   |
++--------+-----------------+-------------+
+| Juan   | Matemáticas 101 | Matemáticas |
++--------+-----------------+-------------+
+```
+
+## Obtener el nombre del alumno y el nombre del profesor de las clases en las que están inscritos los alumnos mayores de 18 años.
+
+select al.nombre, cl.nombre as nombre_profesor
+from alumnos al
+join inscripciones inc on inc.id_alumno = al.id
+join clases cl on cl.id = inc.id_clase
+where al.edad > 18;
++--------+------------------------+
+| nombre |    nombre_profesor     |
++--------+------------------------+
+| Juan   | Matemáticas 101        |
+| Juan   | Historia Antigua       |
+| María  | Literatura Moderna     |
+| María  | Biología Avanzada      |
+| Pedro  | Química Orgánica       |
+| Pedro  | Física Cuántica        |
+| Laura  | Arte Contemporáneo     |
+| Laura  | Inglés Avanzado        |
+| Carlos | Economía Internacional |
+| Ana    | Derecho Penal          |
++--------+------------------------+
+
+## Obtener el número total de alumnos inscritos en cada clase. El resultado debe mostrar el nombre de la clase y el número de alumnos.
+
+```sql
+sqlite> SELECT cl.nombre AS clase, COUNT(inc.id_alumno) AS numero_de_alumnos
+FROM Clases cl
+INNER JOIN Inscripciones inc ON cl.id = inc.id_clase
+GROUP BY cl.id;
++------------------------+-------------------+
+|         clase          | numero_de_alumnos |
++------------------------+-------------------+
+| Matemáticas 101        | 1                 |
+| Historia Antigua       | 1                 |
+| Literatura Moderna     | 1                 |
+| Biología Avanzada      | 1                 |
+| Química Orgánica       | 1                 |
+| Física Cuántica        | 1                 |
+| Arte Contemporáneo     | 1                 |
+| Inglés Avanzado        | 1                 |
+| Economía Internacional | 1                 |
+| Derecho Penal          | 1                 |
++------------------------+-------------------+
+```
 
