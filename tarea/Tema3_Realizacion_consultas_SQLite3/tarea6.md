@@ -479,6 +479,28 @@ sqlite> select p.id_pedido, p.fecha_pedido from pedidos p
 | 1         | 2024-02-01   |
 +-----------+--------------+
 
+** aqui esta con el nombre **
+select fecha_pedido, cl.nombre
+from pedidos p, clientes cl
+where cl.id = p.id_cliente
+order by p.fecha_pedido asc
+limit 1;
++--------------+------------+
+| fecha_pedido |   nombre   |
++--------------+------------+
+| 2024-02-01   | Juan Pérez |
++--------------+------------+
+
+** esta es mas precisa ya que devuelve todo los clientes si hay mas de uno.**
+
+SELECT c.nombre, p.fecha_pedido
+FROM clientes c, pedidos p
+WHERE c.id = p.id_cliente
+  AND p.fecha_pedido = (
+      SELECT MIN(fecha_pedido) 
+      FROM pedidos
+  );
+
 ```
 
 **Obtener los productos cuyos nombres comienzan con 'A' o 'B'.**  
