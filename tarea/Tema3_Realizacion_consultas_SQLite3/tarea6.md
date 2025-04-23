@@ -193,6 +193,8 @@ sqlite> select avg(precio)as precio_promedio_productos from productos;
 ```sql
 sqlite> select email from clientes
    ...> where email regexp '@';
+
+** este me verifica que dentro del campo email tengo una @.**
 +---------------------------+
 |           email           |
 +---------------------------+
@@ -226,6 +228,13 @@ sqlite> select email from clientes
 | roberto@example.com       |
 | sofia@example.com         |
 +---------------------------+
+
+ tambièn podria aunque este me dice que el campo no se nulo pero no le importa su contenido
+
+SELECT nombre, email 
+FROM clientes
+WHERE email IS NOT NULL;
+
 ```
 
 **Obtener el producto más caro.**  
@@ -249,6 +258,44 @@ sqlite> select nombre, max(precio)as precio_mas_caro from productos;
 **Obtener los pedidos realizados en febrero de 2024.** 
 
 ```sql
+sqlite> SELECT pro.nombre, p.fecha_pedido, pro.id 
+FROM productos pro, pedidos p
+WHERE p.id_producto = pro.id
+  AND p.fecha_pedido BETWEEN '2024-02-01' AND '2024-02-29';
++-----------------------------------+--------------+----+
+|              nombre               | fecha_pedido | id |
++-----------------------------------+--------------+----+
+| Laptop                            | 2024-02-01   | 1  |
+| Smartphone                        | 2024-02-02   | 2  |
+| TV LED                            | 2024-02-03   | 3  |
+| Tablet                            | 2024-02-04   | 4  |
+| Auriculares Bluetooth             | 2024-02-05   | 5  |
+| Impresora                         | 2024-02-06   | 6  |
+| Cámara Digital                    | 2024-02-07   | 7  |
+| Reproductor de Audio              | 2024-02-08   | 8  |
+| Altavoces Inalámbricos            | 2024-02-09   | 9  |
+| Reloj Inteligente                 | 2024-02-10   | 10 |
+| Teclado Inalámbrico               | 2024-02-11   | 11 |
+| Ratón Óptico                      | 2024-02-12   | 12 |
+| Monitor LED                       | 2024-02-13   | 13 |
+| Mochila para Portátil             | 2024-02-14   | 14 |
+| Disco Duro Externo                | 2024-02-15   | 15 |
+| Router Wi-Fi                      | 2024-02-16   | 16 |
+| Lámpara LED                       | 2024-02-17   | 17 |
+| Batería Externa                   | 2024-02-18   | 18 |
+| Estuche para Auriculares          | 2024-02-19   | 19 |
+| Tarjeta de Memoria                | 2024-02-20   | 20 |
+| Cargador Inalámbrico              | 2024-02-21   | 21 |
+| Kit de Limpieza para Computadoras | 2024-02-22   | 22 |
+| Funda para Tablet                 | 2024-02-23   | 23 |
+| Soporte para Teléfono             | 2024-02-24   | 24 |
+| Hub USB                           | 2024-02-25   | 25 |
+| Webcam HD                         | 2024-02-26   | 26 |
+| Funda para Laptop                 | 2024-02-27   | 27 |
+| Adaptador HDMI                    | 2024-02-28   | 28 |
++-----------------------------------+--------------+----+
+
+
 FROM pedidos 
 WHERE fecha_pedido BETWEEN '2024-02-01' AND '2024-02-29';
 +-----------+--------------+
@@ -327,6 +374,45 @@ ORDER BY cantidad_total DESC;
 | Soporte para Teléfono             | 1              |
 | Funda para Laptop                 | 1              |
 +-----------------------------------+----------------+
+
+sqlite> SELECT pro.nombre, SUM(p.cantidad)
+FROM pedidos p, productos pro
+WHERE p.id_producto = pro.id
+GROUP BY p.id_producto
+ORDER BY p.id_producto;
++-----------------------------------+-----------------+
+|              nombre               | SUM(p.cantidad) |
++-----------------------------------+-----------------+
+| Laptop                            | 2               |
+| Smartphone                        | 1               |
+| TV LED                            | 3               |
+| Tablet                            | 1               |
+| Auriculares Bluetooth             | 2               |
+| Impresora                         | 1               |
+| Cámara Digital                    | 3               |
+| Reproductor de Audio              | 2               |
+| Altavoces Inalámbricos            | 1               |
+| Reloj Inteligente                 | 2               |
+| Teclado Inalámbrico               | 1               |
+| Ratón Óptico                      | 3               |
+| Monitor LED                       | 1               |
+| Mochila para Portátil             | 2               |
+| Disco Duro Externo                | 1               |
+| Router Wi-Fi                      | 3               |
+| Lámpara LED                       | 2               |
+| Batería Externa                   | 1               |
+| Estuche para Auriculares          | 2               |
+| Tarjeta de Memoria                | 1               |
+| Cargador Inalámbrico              | 3               |
+| Kit de Limpieza para Computadoras | 1               |
+| Funda para Tablet                 | 2               |
+| Soporte para Teléfono             | 1               |
+| Hub USB                           | 3               |
+| Webcam HD                         | 2               |
+| Funda para Laptop                 | 1               |
+| Adaptador HDMI                    | 2               |
++-----------------------------------+-----------------+
+
 
 ```
 
