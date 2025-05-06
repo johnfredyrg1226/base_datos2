@@ -6,45 +6,286 @@
 
 ## Objetivo
 
-Simulacro de examen se provee de los siguientes ficheros:
-
-- [examen_multitabla.sql](files/simulacro_multitabla.sql). Fichero que contiene la especificación de la BBDD e inserts para la realización del examen.
-- [XX_consultas_multitabla.sql](files/XX_consultas_multitabla_simulacro.sql). Conjunto de consultas a realizar por el alumno. Dentro se encuentra la rúbrica del examen.
-Se debe de entregar el fichero XX_consultas_multitabla.sql con el nombre y apellidos correspondiente de cada alumno.
-
 ### Consultas Básicas (8 consultas - 1.6 puntos)
 
 1. Listar todos los libros disponibles.
    > **Pista**: Select *
+
+```sql
+
+ select *
+from libro;
+
++----+-----------------------------------+------------------------+-----------------+-----------------+------------+
+| id |              titulo               |         autor          |     genero      | año_publicacion | disponible |
++----+-----------------------------------+------------------------+-----------------+-----------------+------------+
+| 1  | El Quijote                        | Miguel de Cervantes    | Clásico         | 1605            | 1          |
+| 2  | Cien años de soledad              | Gabriel García Márquez | Realismo mágico | 1967            | 0          |
+| 3  | 1984                              | George Orwell          | Ciencia ficción | 1949            | 1          |
+| 4  | Orgullo y prejuicio               | Jane Austen            | Romance         | 1813            | 0          |
+| 5  | La sombra del viento              | Carlos Ruiz Zafón      | Misterio        | 2001            | 1          |
+| 6  | Rayuela                           | Julio Cortázar         | Experimental    | 1963            | 0          |
+| 7  | Ficciones                         | Jorge Luis Borges      | Cuentos         | 1944            | 1          |
+| 8  | Los pilares de la Tierra          | Ken Follett            | Histórica       | 1989            | 0          |
+| 9  | El amor en los tiempos del cólera | Gabriel García Márquez | Romance         | 1985            | 1          |
+| 10 | La casa de los espíritus          | Isabel Allende         | Realismo mágico | 1982            | 0          |
++----+-----------------------------------+------------------------+-----------------+-----------------+------------+
+```
+
+ 
 2. Mostrar socios de Madrid ordenados por apellido.
-   > **Pista**: order.   
+   > **Pista**: order. 
+
+```sql
+   select s.*
+   from socio s
+   where s.ciudad = 'Madrid'
+   order by s.apellido1;
+
+   +----+--------+-----------+-----------+--------+------------+-----------+
+| id | nombre | apellido1 | apellido2 | ciudad | fecha_alta | categoria |
++----+--------+-----------+-----------+--------+------------+-----------+
+| 1  | Laura  | García    | Martínez  | Madrid | 2020-03-15 | A         |
+| 5  | Elena  | Martín    | Díaz      | Madrid | 2023-02-18 | B         |
++----+--------+-----------+-----------+--------+------------+-----------+
+```  
 3. Libros publicados después de 1950
       > **Pista**: where
+
+```sql
+
+select l.* 
+from libro l
+where l.año_publicacion > 1950;
+
++----+-----------------------------------+------------------------+-----------------+-----------------+------------+
+| id |              titulo               |         autor          |     genero      | año_publicacion | disponible |
++----+-----------------------------------+------------------------+-----------------+-----------------+------------+
+| 2  | Cien años de soledad              | Gabriel García Márquez | Realismo mágico | 1967            | 0          |
+| 5  | La sombra del viento              | Carlos Ruiz Zafón      | Misterio        | 2001            | 1          |
+| 6  | Rayuela                           | Julio Cortázar         | Experimental    | 1963            | 0          |
+| 8  | Los pilares de la Tierra          | Ken Follett            | Histórica       | 1989            | 0          |
+| 9  | El amor en los tiempos del cólera | Gabriel García Márquez | Romance         | 1985            | 1          |
+| 10 | La casa de los espíritus          | Isabel Allende         | Realismo mágico | 1982            | 0          |
++----+-----------------------------------+------------------------+-----------------+-----------------+------------+
+
+```
 4. Bibliotecarios con más de 3 años de antigüedad
       > **Pista**: saber la fecha actual
+
+```sql
+select *
+from bibliotecario
+where antiguedad > 3;
+
++----+-----------+-----------+-----------+------------+
+| id |  nombre   | apellido1 | apellido2 | antiguedad |
++----+-----------+-----------+-----------+------------+
+| 1  | Daniel    | Vázquez   | Gil       | 5          |
+| 4  | Lucía     | Reyes     | Martín    | 7          |
+| 6  | Isabel    | Morales   | Iglesias  | 4          |
+| 7  | Francisco | Santana   | Méndez    | 6          |
++----+-----------+-----------+-----------+------------+
+
+```
 5. Préstamos realizados en 2023
       > **Pista**: where like|Expresion regular
+
+```sql
+select p.fecha_prestamo, l.titulo
+from prestamo p
+inner join libro l on l.id = p.id_libro
+where fecha_devolucion regexp '^2023-\d{2}-\d{2}';
+--------------------------------------------------------
+
+select p.fecha_prestamo, l.titulo
+from prestamo p, libro l
+where l.id = p.id_libro
+and fecha_devolucion regexp '^2023-\d{2}-\d{2}';
+
++----------------+--------------------------+
+| fecha_prestamo |          titulo          |
++----------------+--------------------------+
+| 2023-01-10     | Cien años de soledad     |
+| 2023-02-15     | Orgullo y prejuicio      |
+| 2023-04-05     | Los pilares de la Tierra |
+| 2023-01-22     | Cien años de soledad     |
+| 2023-02-18     | Orgullo y prejuicio      |
+| 2023-04-10     | Los pilares de la Tierra |
+| 2023-01-05     | El Quijote               |
+| 2023-02-10     | 1984                     |
+| 2023-04-20     | Ficciones                |
++----------------+--------------------------+
+
+```
+
 6. Socios sin segundo apellido.
       > **Pista**: Apellido2 = NULL
+
+```sql
+select *
+from socio
+where apellido2 is null;
+
++----+----------+-----------+-----------+-----------+------------+-----------+
+| id |  nombre  | apellido1 | apellido2 |  ciudad   | fecha_alta | categoria |
++----+----------+-----------+-----------+-----------+------------+-----------+
+| 3  | Ana      | Sánchez   |           | Valencia  | 2022-01-10 | C         |
+| 9  | Patricia | Romero    |           | Barcelona | 2023-01-15 | A         |
++----+----------+-----------+-----------+-----------+------------+-----------+
+
+```
 7. Libros del género "Realismo mágico"
       > **Pista**: Where
+
+```sql
+select *
+from libro
+where genero = 'Realismo mágico';
+
++----+--------------------------+------------------------+-----------------+-----------------+------------+
+| id |          titulo          |         autor          |     genero      | año_publicacion | disponible |
++----+--------------------------+------------------------+-----------------+-----------------+------------+
+| 2  | Cien años de soledad     | Gabriel García Márquez | Realismo mágico | 1967            | 0          |
+| 10 | La casa de los espíritus | Isabel Allende         | Realismo mágico | 1982            | 0          |
++----+--------------------------+------------------------+-----------------+-----------------+------------+
+
+```
 8. Préstamos no devueltos. 
    > **Pista**: fecha_devolucion = NULL
 
+```sql
+select pre.*, l.titulo
+from prestamo pre
+inner join libro l on l.id = pre.id_libro
+where pre.fecha_devolucion is null; 
+
++----+----------------+------------------+----------+----------+-----------------------------------+
+| id | fecha_prestamo | fecha_devolucion | id_socio | id_libro |              titulo               |
++----+----------------+------------------+----------+----------+-----------------------------------+
+| 3  | 2023-03-20     |                  | 5        | 6        | Rayuela                           |
+| 5  | 2023-05-12     |                  | 4        | 10       | La casa de los espíritus          |
+| 8  | 2023-03-25     |                  | 8        | 6        | Rayuela                           |
+| 10 | 2023-05-15     |                  | 10       | 10       | La casa de los espíritus          |
+| 13 | 2023-03-15     |                  | 3        | 5        | La sombra del viento              |
+| 15 | 2023-05-25     |                  | 5        | 9        | El amor en los tiempos del cólera |
++----+----------------+------------------+----------+----------+-----------------------------------+
+
+```
 ### Consultas Multitabla (WHERE) (8 consultas - 2.4 puntos)
 
 1. Préstamos con nombres de socio y libro (sin JOIN)
       > **Pista**: where id claves tablas.
+
+```sql
+select s.nombre, l.titulo
+from prestamo pre, libro l, socio s
+where pre.id_libro = l.id
+and s.id = pre.id_socio
+and pre.fecha_devolucion is null;
+
++---------+-----------------------------------+
+| nombre  |              titulo               |
++---------+-----------------------------------+
+| Elena   | Rayuela                           |
+| David   | La casa de los espíritus          |
+| Miguel  | Rayuela                           |
+| Antonio | La casa de los espíritus          |
+| Ana     | La sombra del viento              |
+| Elena   | El amor en los tiempos del cólera |
++---------+-----------------------------------+
+
+```
 2. Libros prestados a socios de Barcelona (sin JOIN)
       > **Pista**: where id claves tablas.
+
+```sql 
+select s.nombre
+from prestamo pre, socio s
+where s.id = pre.id_socio
+and s.ciudad = 'Barcelona';
++----------+
+|  nombre  |
++----------+
+| Carlos   |
+| Patricia |
+| Carlos   |
++----------+
+
+select s.nombre, s.ciudad
+from prestamo pre, socio s
+where s.id = pre.id_socio
+and s.ciudad = 'Barcelona';
++----------+-----------+
+|  nombre  |  ciudad   |
++----------+-----------+
+| Carlos   | Barcelona |
+| Patricia | Barcelona |
+| Carlos   | Barcelona |
++----------+-----------+
+
+```
 3. Socios que han tomado prestado "Cien años de soledad" (sin JOIN)
       > **Pista**: where id claves tablas and edad
+
+```sql
+select s.nombre
+from prestamo pre, socio s, libro l
+where pre.id_socio = s.id
+and pre.id_libro = l.id
+and titulo = 'Cien años de soledad';
+
++--------+
+| nombre |
++--------+
+| Laura  |
+| Javier |
++--------+
+
+select s.nombre
+from prestamo pre,socio s, libro l
+where pre.id_socio = s.id
+and pre.id_libro = l.id
+and l.id = (select l.id
+            from libro l
+            where l.titulo = 'Cien años de soledad');
+
++--------+
+| nombre |
++--------+
+| Laura  |
+| Javier |
++--------+
+
+```
 4. Bibliotecarios que han gestionado préstamos (sin JOIN)
       > **Pista**: where id claves tablas.
+
+```sql
+
+
+
+```
 5. Préstamos con retraso.
       > **Pista**: where id claves tablas && fecha_devolucion > fecha_prestamo + 14 días.
+
+```sql
+select titulo
+from libro l, prestamo p
+where l.id = p.id_libro 
+and id_libro in ( SELECT 
+                        id_libro
+                        FROM prestamo
+                        WHERE JULIANDAY(fecha_devolucion) - JULIANDAY(fecha_prestamo) > 14);
+
+```
 6. Socios que nunca han tomado prestado un libro (sin LEFT JOIN)
       > **Pista**: where id claves tablas.
+
+```sql
+
+```
+
 7. Libros más prestados (sin JOIN)
       > **Pista**: where id claves tablas and top
 8. Autores cuyos libros han sido prestados (sin JOIN)
