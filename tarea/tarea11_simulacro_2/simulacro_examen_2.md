@@ -284,12 +284,32 @@ and id_libro in ( SELECT
 
 ```sql
 
+select s.id, s.nombre
+from socio s, prestamo p, libro l
+where s.id = p.id_socio 
+and l.id = p.id_libro
+and p.id_libro is null;
+
+
+
+select id_socio
+from prestamo 
+where id_socio is null;
+
 ```
 
 7. Libros más prestados (sin JOIN)
       > **Pista**: where id claves tablas and top
+
+```sql
+select 
+```
 8. Autores cuyos libros han sido prestados (sin JOIN)
       > **Pista**: where id claves tablas.
+
+```sql
+
+```
 
 ### Consultas Multitabla (JOIN) (8 consultas - 2.4 puntos)
 
