@@ -1,0 +1,61 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE cliente (
+    id INTEGER PRIMARY KEY,
+    nombre TEXT,
+    apellido1 TEXT,
+    apellido2 TEXT,
+    ciudad TEXT,
+    puntos_fidelidad INTEGER
+);
+INSERT INTO cliente VALUES(1,'Carlos','Martínez','García','Madrid',1500);
+INSERT INTO cliente VALUES(2,'Ana','López','Fernández','Barcelona',800);
+INSERT INTO cliente VALUES(3,'Miguel','Sánchez','Díaz','Valencia',NULL);
+INSERT INTO cliente VALUES(4,'Elena','Gómez',NULL,'Sevilla',1200);
+INSERT INTO cliente VALUES(5,'David','Pérez','Ruiz','Madrid',750);
+INSERT INTO cliente VALUES(6,'Laura','Jiménez','Moreno','Bilbao',950);
+INSERT INTO cliente VALUES(7,'Sofía','Hernández',NULL,'Zaragoza',1800);
+INSERT INTO cliente VALUES(8,'Javier','Domingo','Santos','Málaga',600);
+INSERT INTO cliente VALUES(9,'Patricia','Romero','González','Barcelona',1100);
+INSERT INTO cliente VALUES(10,'Antonio','Navarro','Torres','Valencia',400);
+CREATE TABLE empleado (
+    id INTEGER PRIMARY KEY,
+    nombre TEXT,
+    apellido1 TEXT,
+    apellido2 TEXT,
+    comision REAL
+);
+INSERT INTO empleado VALUES(1,'Daniel','Vázquez','Gil',0.11999999999999999555);
+INSERT INTO empleado VALUES(2,'María','Castro','Ortega',0.10000000000000000555);
+INSERT INTO empleado VALUES(3,'Pablo','Molina','Serrano',0.080000000000000001665);
+INSERT INTO empleado VALUES(4,'Lucía','Reyes','Martín',0.11000000000000000055);
+INSERT INTO empleado VALUES(5,'Alejandro','Suárez','Blanco',0.089999999999999996669);
+INSERT INTO empleado VALUES(6,'Isabel','Morales','Iglesias',0.10000000000000000555);
+INSERT INTO empleado VALUES(7,'Francisco','Santana','Méndez',0.080000000000000001665);
+INSERT INTO empleado VALUES(8,'Cristina','Cabrera','Flores',0.040000000000000000832);
+CREATE TABLE venta (
+    id INTEGER PRIMARY KEY,
+    total REAL,
+    fecha TEXT,
+    id_cliente INTEGER,
+    id_empleado INTEGER,
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id),
+    FOREIGN KEY (id_empleado) REFERENCES empleado(id)
+);
+INSERT INTO venta VALUES(1,899.99000000000000908,'2023-05-15',5,2);
+INSERT INTO venta VALUES(2,1499.4999999999999999,'2022-09-20',1,5);
+INSERT INTO venta VALUES(3,450.75000000000000001,'2023-05-15',2,1);
+INSERT INTO venta VALUES(4,299.89999999999997727,'2022-08-10',8,3);
+INSERT INTO venta VALUES(5,1799.0,'2023-04-22',5,2);
+INSERT INTO venta VALUES(6,3299.9899999999997817,'2022-07-05',7,1);
+INSERT INTO venta VALUES(7,5998.9999999999999999,'2021-09-12',2,1);
+INSERT INTO venta VALUES(8,1299.9500000000000454,'2023-03-18',4,6);
+INSERT INTO venta VALUES(9,2499.4999999999999999,'2022-10-15',8,3);
+INSERT INTO venta VALUES(10,350.25,'2021-06-30',8,2);
+INSERT INTO venta VALUES(11,199.99000000000000908,'2022-08-10',3,7);
+INSERT INTO venta VALUES(12,4198.9999999999999998,'2023-02-14',2,1);
+INSERT INTO venta VALUES(13,799.49999999999999998,'2023-01-25',6,1);
+INSERT INTO venta VALUES(14,249.90000000000000567,'2023-02-02',6,1);
+INSERT INTO venta VALUES(15,898.99999999999999997,'2023-03-10',1,5);
+INSERT INTO venta VALUES(16,2799.9899999999997817,'2023-03-10',1,5);
+COMMIT;

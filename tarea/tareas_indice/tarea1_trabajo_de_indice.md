@@ -191,6 +191,12 @@ Muestro los indices.
 | 2   | sqlite_autoindex_alumno_1 | 1      | pk     | 0       |
 +-----+---------------------------+--------+--------+---------+
 
+Los índices ayudan en consultas con WHERE, JOIN, ORDER BY y GROUP BY.
+
+EXPLAIN QUERY PLAN -- como saber si esta usuando el indice -- 
+SELECT * FROM cliente WHERE documento = '12345678A';
+
+
 y los elimino 
 
 drop index idx_documento;
