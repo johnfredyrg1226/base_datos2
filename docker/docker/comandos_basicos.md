@@ -1,5 +1,8 @@
 ### docker-compose.yml
 
+## ** docker exec -it mysql-db mysql -u root -p
+MYSQL_ROOT_PASSWORD: rootpassword123
+
 ### levantar el contenedor docker compuse:
 
 ```sql
@@ -16,20 +19,13 @@ docker compose restart
 
 
 
- 
-
-
-
-
-
-docker stop mysql-db
-
 
 ### DETENER TODOS LOS CONTENEDORES 
 ```sql
 docker stop $(docker ps -q)
 ```
 
+docker stop mysql-db
 
 
 ### VER CONTENEDORES EN EJECUCION 

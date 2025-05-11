@@ -1,5 +1,7 @@
 ## BASE DE DATOS
 
+
+
 ##### Mostrar las bases de datos disponibles:
 SHOW DATABASES;
 
@@ -48,6 +50,7 @@ WHERE id = 1;
  ## Ver los índices de una tabla:
 ```sql
 SHOW INDEXES FROM <nombre_de_tabla>;
+show index from alumno;
 ```
 
 ##### Crear un índice en una columna:
