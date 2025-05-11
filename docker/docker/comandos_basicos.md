@@ -1,0 +1,98 @@
+### docker-compose.yml
+
+### levantar el contenedor docker compuse:
+
+```sql
+docker compose up -d
+```
+
+
+### reiniciar los contenedore
+
+```sql
+docker compose restart
+```
+
+
+
+
+ 
+
+
+
+
+
+docker stop mysql-db
+
+
+### DETENER TODOS LOS CONTENEDORES 
+```sql
+docker stop $(docker ps -q)
+```
+
+
+
+### VER CONTENEDORES EN EJECUCION 
+
+```sql
+docker ps
+```
+
+
+
+
+### VER TODOS LOS CONTENEDORES 
+
+```sql
+docker ps -a
+```
+
+
+
+### INICIAR UN CONTENEDOR DETENIDO 
+```sql
+docker start <container_name_or_id>
+```
+
+
+
+### DETENER UN CONTENEDOR EN EJECUCIÓN
+```sql
+docker stop <container_name_or_id>
+```
+
+
+
+### REINICIAR CONTENEDOR 
+```sql
+docker restart <container_name_or_id>
+```
+
+
+
+### ELIMINAR CONTENEDOR
+```sql
+docker rm <container_name_or_id>
+```
+
+
+
+### ACCEDER UN CONTENEDOR EN EJECUCION TERNIMAL INTERACTIVA
+
+```sql
+docker exec -it <container_name_or_id> bash
+```
+
+### VER REGISTROS DE UN CONTENEDOR 
+
+```sql
+docker logs <container_name_or_id>
+```
+
+
+### VER PROCESOS DE EJECUCION EN UN CONTENEDOR 
+
+```sql
+docker top <container_name_or_id>
+```
+

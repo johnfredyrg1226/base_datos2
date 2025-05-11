@@ -295,26 +295,66 @@ and p.id_libro is null;
 select id_socio
 from prestamo 
 where id_socio is null;
-
 ```
 
-7. Libros más prestados (sin JOIN)
-      > **Pista**: where id claves tablas and top
+
+#### 7. Libros más prestados (sin JOIN)
+#### > **Pista**: where id claves tablas and top
 
 ```sql
-select 
+select p.id_libro, count(*)as cantida_prestados
+from prestamo p, libro l
+where id_libro in(
+      select id
+      from libro
+)
+group by id_libro
+order by cantida_prestados desc
+limit 3;
+
++----------+-------------------+
+| id_libro | cantida_prestados |
++----------+-------------------+
+| 10       | 20                |
+| 8        | 20                |
+| 6        | 20                |
++----------+-------------------+
+
+
 ```
-8. Autores cuyos libros han sido prestados (sin JOIN)
+#### 8. Autores cuyos libros han sido prestados (sin JOIN)
       > **Pista**: where id claves tablas.
 
 ```sql
+select l.autor, p.id_libro
+from libro l,prestamo p
+where l.id = p.id_libro
+and l.id in (select id_libro
+from libro)
+group by p.id_libro;
++------------------------+----------+
+|         autor          | id_libro |
++------------------------+----------+
+| Miguel de Cervantes    | 1        |
+| Gabriel García Márquez | 2        |
+| George Orwell          | 3        |
+| Jane Austen            | 4        |
+| Carlos Ruiz Zafón      | 5        |
+| Julio Cortázar         | 6        |
+| Jorge Luis Borges      | 7        |
+| Ken Follett            | 8        |
+| Gabriel García Márquez | 9        |
+| Isabel Allende         | 10       |
++------------------------+----------+
 
 ```
 
 ### Consultas Multitabla (JOIN) (8 consultas - 2.4 puntos)
 
-1. Préstamos con nombres de socio y libro.
+#### 1. Préstamos con nombres de socio y libro.
    > **Pista**: JOIN.
+
+   select 
 2. Libros prestados a socios de Barcelona.
    > **Pista**: JOIN.
 3. Socios que han tomado prestado "Cien años de soledad".
