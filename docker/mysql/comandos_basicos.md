@@ -20,6 +20,11 @@ SELECT * FROM <nombre_de_tabla>;
 ##### Crear una nueva base de datos:
 CREATE DATABASE <nombre_de_base_de_datos>;
 
+##### modificar tabla y colocar primari key(despues de crear tabla)
+ALTER TABLE cliente
+ADD PRIMARY KEY (documento);
+
+
 
 Crear una nueva tabla:
 ##### CREATE TABLE <nombre_de_tabla> (
