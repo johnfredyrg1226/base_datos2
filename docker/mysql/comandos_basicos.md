@@ -1,8 +1,13 @@
 ## BASE DE DATOS
+```sql
+empezar:
+docker exec -it mysql-db bash
+mysql -u root -p
+```
 
 
 
-##### Mostrar las bases de datos disponibles:
+## Mostrar las bases de datos disponibles:
 SHOW DATABASES;
 
 ##### Seleccionar una base de datos:
@@ -24,6 +29,26 @@ CREATE DATABASE <nombre_de_base_de_datos>;
 ALTER TABLE cliente
 ADD PRIMARY KEY (documento);
 
+##### ✅ 3. Ver la estructura de cada tabla
+##### Puedes usar:
+
+```sql
+DESCRIBE estudiantes;
+DESCRIBE carreras;
+DESCRIBE materias;
+DESCRIBE notas;
+
+O, para más detalle (como el código SQL original):
+
+sql
+Copiar
+Editar
+SHOW CREATE TABLE estudiantes\G
+SHOW CREATE TABLE carreras\G
+SHOW CREATE TABLE materias\G
+SHOW CREATE TABLE notas\G
+Esto mostrará el código completo de cómo fue creada cada tabla.
+```
 
 
 Crear una nueva tabla:
