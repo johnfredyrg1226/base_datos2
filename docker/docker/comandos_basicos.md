@@ -1,5 +1,10 @@
 ### docker-compose.yml
 
+
+## primero para entrar
+docker exec -it phpmyadmin sh
+
+
 ## ** docker exec -it mysql-db mysql -u root -p
 MYSQL_ROOT_PASSWORD: rootpassword123
 
@@ -39,25 +44,7 @@ docker ps
 
 ### VER TODOS LOS CONTENEDORES 
 
-```sql
-docker ps -a
-```
-
-
-
-### INICIAR UN CONTENEDOR DETENIDO 
-```sql
-docker start <container_name_or_id>
-```
-
-
-
-### DETENER UN CONTENEDOR EN EJECUCIÓN
-```sql
-docker stop <container_name_or_id>
-```
-
-
+```sql 
 
 ### REINICIAR CONTENEDOR 
 ```sql

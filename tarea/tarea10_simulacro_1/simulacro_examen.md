@@ -152,17 +152,17 @@ sqlite> select max(categoria) from suministrador;
 
 
 ```sql
-select nombre, apellido2 from consumidor
-where apellido2 is null;
+sqlite> select id,nombre,apellido1
+from consumidor
+where apellido2 is null
+order by apellido1 and nombre; 
++----+--------+-----------+
+| id | nombre | apellido1 |
++----+--------+-----------+
+| 4  | Adrián | Suárez    |
+| 7  | Pilar  | Ruiz      |
++----+--------+-----------+
 
-sqlite> select nombre, apellido2 from consumidor
-where apellido2 is null;
-+--------+-----------+
-| nombre | apellido2 |
-+--------+-----------+
-| Adrián |           |
-| Pilar  |           |
-+--------+-----------+
 ```
 
 ## -- (Consultas Multitabla Where)
@@ -794,7 +794,7 @@ order by sum.id;
 +--------+-----------+-----------+---------------------+
 |        |           |           |                     |
 +--------+-----------+-----------+---------------------+
-no sale nada.
+no sale nada no  hay nadie con la fecha indicada
 ```
 
 
