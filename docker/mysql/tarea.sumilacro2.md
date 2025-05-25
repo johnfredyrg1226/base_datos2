@@ -358,16 +358,77 @@ Consultar datos desde la vista, mostrando el nombre del estudiante y la fecha de
 Eliminar la vista.
 
 ```sql
-create view vista_matriculas as select e.nombre as estudiante , c.nombre as curso , m.fecha from estudiantes e inner join matriculas m on e.id = m.estudiante_id inner join cursos c on c.id = m.curso_id;
+drop view if exists vista_matriculas;
+create view vista_matriculas as select e.nombre as nombre_estudiante , c.nombre as nombre_curso , m.fecha as fecha_matricula from estudiantes e inner join matriculas m on e.id = m.estudiante_id inner join cursos c on c.id = m.curso_id;
 
+select nombre_estudiante, fecha_matricula from vista_matriculas;
 
++-------------------+-----------------+
+| nombre_estudiante | fecha_matricula |
++-------------------+-----------------+
+| Mar�a L�pez       | 2021-09-01      |
+| Juan P�rez        | 2022-09-01      |
+| Luc�a Fern�ndez   | 2023-09-02      |
+| Carlos Ruiz       | 2024-09-03      |
+| Mar�a L�pez       | 2020-09-04      |
+| Juan P�rez        | 2022-09-05      |
+| Luc�a Fern�ndez   | 2023-09-06      |
+| Carlos Ruiz       | 2024-09-06      |
++-------------------+-----------------+
+
+drop VIEW vista_matriculas;
 ```
 
-⚙ Parte 4: Procedimiento Almacenado
+## ⚙ Parte 4: Procedimiento Almacenado
+
 Crear un procedimiento llamado cursos_por_profesor que reciba el nombre del profesor como parámetro y devuelva los cursos que imparte y su número de créditos.
 Ejecutar el procedimiento con el nombre “Dr. Luis Gómez”.
 Eliminar el procedimiento.
-🔢 Parte 5: Función Definida por el Usuario
+
+```sql
+drop PROCEDURE if EXISTS curso_por_profesor;
+
+DELIMITER $$s
+CREATE PROCEDURE curso_por_profesor(in nombre_pro varchar(50))
+BEGIN
+   		select c.nombre as nombre _del_curso, c.creditos
+        from cursos c 
+        inner join profesores p on p.id = c.profesor_id
+        where p.nombre = nombre_pro ;
+END $$
+DELIMITER ; 
+
+call curso_por_profesor('Dr. Luis Gómez');
+
+```
+
+## 🔢 Parte 5: Función Definida por el Usuario
+
 Crear una función llamada total_creditos_estudiante que reciba el ID de un estudiante y devuelva el total de créditos que ha matriculado.
 Ejecutar la función para un estudiante específico.
 Eliminar la función.
+
+```sql
+
+drop FUNCTION if exists total_creditos_estudiante;
+
+DELIMITER $$
+create FUNCTION total_creditos_estudiante(id_estudiante int)
+ RETURNS int 
+ BEGIN
+        DECLARE total int;
+        
+        select sum(c.creditos) into total
+            from matriculas m  
+            inner join cursos c ON m.curso_id = c.id
+            where m.estudiante_id = id_estudiante;
+ 
+ 		RETURN IFNULL(total, 0);
+ END $$
+ DELIMITER ;
+
+
+ SELECT total_creditos_estudiante(3);
+
+ drop FUNCTION if exists total_creditos_estudiante;
+```
